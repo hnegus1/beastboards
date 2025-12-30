@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+EXPOSE 3001
+
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+COPY . /app
+WORKDIR /app
+ARG BUILD_CONFIGURATION=Release
+
+RUN dir  
+
+RUN dotnet restore BeastBoards.Api.csproj
+# Build and publish a release
+RUN dotnet publish -o publish
+
+# Build runtime image
+WORKDIR /app/publish
+RUN dotnet BeastBoards.Api.dll --urls=http://0.0.0.0:3001
