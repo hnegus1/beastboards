@@ -11,7 +11,7 @@ namespace BeastBoards.Api.Services
 
         public List<LeaderboardTiming> AddLeaderboardTiming(AddLeaderboardTimingRequest req, ulong steamId)
         {
-            var exists = _db.LeaderboardTimings.FirstOrDefault(x => x.SteamId == steamId && x.LevelNumber == req.LevelNumber);
+            var exists = _db.LeaderboardTimings.FirstOrDefault(x => x.SteamId == steamId && x.LevelNumber == req.LevelNumber && x.Category == req.Category);
 
             LeaderboardTiming timing = null;
             if (exists != null)
@@ -32,7 +32,8 @@ namespace BeastBoards.Api.Services
                 {
                     LevelNumber = req.LevelNumber,
                     SteamId = steamId,
-                    Time = req.BestTime
+                    Time = req.BestTime,
+                    Category = req.Category
                 };
 
                 _db.LeaderboardTimings.Add(newEntry);
@@ -43,7 +44,7 @@ namespace BeastBoards.Api.Services
 
 
             //get friend entries
-            var friends = _db.LeaderboardTimings.AsNoTracking().Where(x => x.LevelNumber == req.LevelNumber && req.FriendIds.Contains(x.SteamId)).ToList();
+            var friends = _db.LeaderboardTimings.AsNoTracking().Where(x => x.LevelNumber == req.LevelNumber && x.Category == req.Category && req.FriendIds.Contains(x.SteamId)).ToList();
 
             var allEntries = friends.Concat([timing]).OrderBy(x => x.Time).ToList();
 

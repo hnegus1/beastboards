@@ -56,12 +56,13 @@ namespace BeastBoards
             }
         }
 
-        public List<LeaderboardTiming> AddLeaderboardTiming(int levelNumber, float bestTime)
+        public List<LeaderboardTiming> AddLeaderboardTiming(int levelNumber, float bestTime, string category)
         {
             var body = new AddLeaderboardTimingRequest()
             {
                 BestTime = bestTime,
                 LevelNumber = levelNumber,
+                Category = category,
                 FriendIds = BeastBoardsMod.Steam.Users.Where(x => !x.IsPlayer).Select(x => x.Id).ToList()
             };
 

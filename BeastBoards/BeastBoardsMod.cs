@@ -75,8 +75,9 @@ namespace BeastBoards
 
             var info = GameManager.instance.levelController.GetInformationSetter().GetInformation();
             var data = GameManager.instance.progressManager.GetLevelData(info);
+            
 
-            List<LeaderboardTiming> leaderboard = BeastBoardsMod.Api.AddLeaderboardTiming(info.GetLevelNumber(), data.GetBestTime());
+            List<LeaderboardTiming> leaderboard = BeastBoardsMod.Api.AddLeaderboardTiming(info.GetLevelNumber(), data.GetBestTime(), info.GetLevelCategoryName());
 
             AssetBundle localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "beastboardsui"));
 
