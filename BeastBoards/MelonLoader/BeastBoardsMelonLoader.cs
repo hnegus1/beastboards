@@ -1,3 +1,5 @@
+#if MOD_MELONLOADER
+
 using MelonLoader;
 using BeastBoards.Common;
 using BeastBoards.MelonLoader;
@@ -26,3 +28,5 @@ namespace BeastBoards.MelonLoader
 
     }
 }
+
+#endif

@@ -10,7 +10,7 @@ namespace BeastBoards.Common
     public static class Core
     {
         public const string MOD_NAME = "BeastBoards";
-        public const string MOD_VERSION = "1.0.0";
+        public const string MOD_VERSION = "1.0.2";
         public const string MOD_AUTHOR = "VideoGamesAreBad";
         public const string MOD_GUID = "uk.co.videogamesarebad.beastboards"; // for BepInEx
     

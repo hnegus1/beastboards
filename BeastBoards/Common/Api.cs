@@ -10,7 +10,7 @@ namespace BeastBoards.Common
     {
         private readonly HttpClient _httpClient;
 
-#if DEBUG
+#if MOD_BEPINEX_DEBUG || MOD_MELONLOADER_DEBUG
         private readonly string _apiUrl = "https://localhost:7072";
 #else
         private readonly string _apiUrl = "https://api.beastboards.videogamesarebad.co.uk";

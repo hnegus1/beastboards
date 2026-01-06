@@ -6,26 +6,50 @@
 		<RootNamespace>BeastBoards</RootNamespace>
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
+		<AssemblyVersion>1.0.2</AssemblyVersion>
+		<FileVersion>1.0.2</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Configurations>Mod_MelonLoader;Mod_BepInEx</Configurations>
+		<Configurations>Mod_MelonLoader_RELEASE;Mod_BepInEx_RELEASE;Mod_BepInEx_DEBUG;Mod_MelonLoader_DEBUG</Configurations>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 	
-	<PropertyGroup Condition="'$(Configuration)'=='Mod_MelonLoader'">
+	<PropertyGroup Condition="$(Configuration.StartsWith('Mod_MelonLoader'))">
 		<AssemblyName>BeastBoards.MelonLoader</AssemblyName>
 	</PropertyGroup>
 	
-	<PropertyGroup Condition="'$(Configuration)'=='Mod_BepInEx'">
+	<PropertyGroup Condition="$(Configuration.StartsWith('Mod_BepInEx'))">
 		<AssemblyName>BeastBoards.BepInEx</AssemblyName>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mod_MelonLoader_RELEASE|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);MOD_MELONLOADER</DefineConstants>
+	  <Optimize>False</Optimize>
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mod_BepInEx_RELEASE|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);MOD_BEPINEX</DefineConstants>
+	  <Optimize>False</Optimize>
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mod_BepInEx_DEBUG|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);MOD_BEPINEX</DefineConstants>
+	  <Optimize>False</Optimize>
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mod_MelonLoader_DEBUG|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);MOD_MELONLOADER</DefineConstants>
+	  <Optimize>False</Optimize>
+	  <DebugType>portable</DebugType>
 	</PropertyGroup>
 
 	<!-- MelonLoader references (UnityEngine stuff taken from game files, could also use nuget as the bepin config does) -->
-	<ItemGroup Condition="'$(Configuration)'=='Mod_MelonLoader'">
+	<ItemGroup Condition="$(Configuration.StartsWith('Mod_MelonLoader'))">
 		<Reference Include="MelonLoader">
 			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\I Am Your Beast\MelonLoader\MelonLoader.dll</HintPath>
 		</Reference>
@@ -49,7 +73,8 @@
 		</Reference>
 	</ItemGroup>
 	
-	<ItemGroup Condition="'$(Configuration)'=='Mod_BepInEx'">
+	
+	<ItemGroup Condition="$(Configuration.StartsWith('Mod_BepInEx'))">
 		<PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
 		<PackageReference Include="BepInEx.Core" Version="5.*" />
 		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" />
@@ -124,20 +149,26 @@
 		</Reference>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)'=='Mod_MelonLoader'">
+	<ItemGroup Condition="$(Configuration.StartsWith('Mod_MelonLoader'))">
 		<Compile Include="MelonLoader\**\*.cs" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)'=='Mod_BepInEx'">
+
+	<ItemGroup Condition="$(Configuration.StartsWith('Mod_BepInEx'))">
 		<Compile Include="BepInEx\**\*.cs" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<Compile Include="Common\**\*.cs" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="BepInEx\BeastBoardsBepInEx.cs" />
+	  <Compile Include="MelonLoader\BeastBoardsMelonLoader.cs" />
+	</ItemGroup>
 	
 	<Target Name="CopyModToGame" AfterTargets="PostBuildEvent">
-		<Copy Condition="'$(Configuration)'=='Mod_MelonLoader'" SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\I Am Your Beast\Mods" />
-		<Copy Condition="'$(Configuration)'=='Mod_BepInEx'" SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\I Am Your Beast\BepInEx\Plugins" />
+		<Copy Condition="$(Configuration.StartsWith('Mod_MelonLoader'))" SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\I Am Your Beast\Mods" />
+		<Copy Condition="$(Configuration.StartsWith('Mod_BepInEx'))" SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\I Am Your Beast BepInEx\BepInEx\Plugins\BeastBoards" />
 	</Target>
 </Project>

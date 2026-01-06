@@ -6,15 +6,15 @@ A leader board mod for I Am Your Beast. Currently Steam Friends only. Requires y
 
 ## Installation
 
-1. Install [MelonLoader 5 Mono](https://melonwiki.xyz) for your legally obtained Steam copy of I Am Your Beast. Other versions of MelonLoader won’t work. Other versions of I Am Your Beast are not supported.
+BeastBoard requires a Unity Mod Loader to be installed first. Both [MelonLoader 5 Mono](https://melonwiki.xyz) and [BepInEx 5 Mono](https://docs.bepinex.dev/articles/user_guide/installation/index.html) are supported. Many mods for I Am Your Beast use BepInEx so you may want to use that to ensure compatability. Make sure you are using a legally obtained Steam copy of I Am Your Beast. Other versions of the game are not supported and won't work. 
 
-2. Download the mod from the releases section and place the contents of the download into your I Am Your Beast folder
+1. Download the mod from the releases section for the loader that you have used and place the contents of the download into your I Am Your Beast folder
 
-3. Launch the game via Steam. The mod will retroactively add your best times on completion. 
+2. Launch the game via Steam. The mod will retroactively add your best times on completion of a level. 
 
 ## Building / Project Information
 
-Repo contains both the BeastBoards mod and the server code. The mod is a simple MelonLoader mod while the server is ASP. Requires .NET 8 to build and run.
+Repo contains both the BeastBoards mod and the server code. The mod is a simple MelonLoader mod while the server is ASP. Requires .NET 9 to build and run.
 
 The UI code is not here. Let me know if you want to have a look.
 

@@ -1,3 +1,5 @@
+#if !MOD_MELONLOADER
+
 using System.Collections;
 using BeastBoards.Common;
 using BepInEx;
@@ -12,6 +14,9 @@ namespace BeastBoards.BepInEx
     {
         private void Awake()
         {
+            //Unity will destroy the plugin if this is not set.
+            gameObject.hideFlags = HideFlags.HideAndDontSave;
+
             Logger.LogInfo("Hello from BeastBoards!");
 			new Harmony(Core.MOD_GUID).PatchAll();
         }
@@ -29,3 +34,6 @@ namespace BeastBoards.BepInEx
         }
     }
 }
+
+
+#endif

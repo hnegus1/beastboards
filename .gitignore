@@ -484,3 +484,7 @@ $RECYCLE.BIN/
 *.swp
 BeastBoards.Api/appsettings.Development.json
 BeastBoards.Api/appsettings.json
+
+Build/out/*
+Build/publish/*
+Build/zips/*
